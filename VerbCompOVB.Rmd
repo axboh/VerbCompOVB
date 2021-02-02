@@ -263,6 +263,7 @@ varimps_gg <- ggplot(plot_imps) +
         axis.text=element_text(size=12, face="bold"),
         axis.title.x =element_text(size=20, face="bold"))
 varimps_gg
+ggsave("Figure1.svg", varimps_gg, device = "svg", width = 240, height= 160, units = "mm",dpi = 300)
 ```
 
 ## Coefficient plots
@@ -306,7 +307,7 @@ two_brackets <- list(c("Country", "CANADA", "INDIA"),
                  c("Dimension", "Involved versus Informational", "Addressee-orientation"))
 
 ## Only use each option once (e.g. theme) and improve structure
-dwplot(data_plot, dodge_size = 0.4, whisker_args = list(aes(linetype = model))) +
+Fig2 <- dwplot(data_plot, dodge_size = 0.4, whisker_args = list(aes(linetype = model))) +
   theme_bw() + 
   ggtitle("Predictors of verb complementation choice") + 
   xlab("Coefficient Estimate") + 
@@ -314,10 +315,10 @@ dwplot(data_plot, dodge_size = 0.4, whisker_args = list(aes(linetype = model))) 
   xlim(-1.2,0.5) + 
   geom_vline(xintercept = 0, colour="grey60", linetype=2) + 
   #theme(legend.position = "none") +
-  annotate("pointrange", x = -1.14, y = 5, xmin=-1.19, xmax=-1.09, size = 0.5, col="grey60") + 
-  annotate("text", x = -1.05, y = 5, size = 2.5, hjust = 0, label = "Model without register: C-value = 0.91, AIC = 8153", col="grey50") + 
-  annotate("pointrange", x = -1.14, y = 4.4, xmin=-1.19, xmax=-1.09, size = 0.5, col="grey20", lty=2) + 
-  annotate("text", x = -1.05, y = 4.4, size = 2.5, hjust = 0, label = "Model with register: C-value = 0.92, AIC = 7900", col="grey30") + 
+  annotate("pointrange", x = -1.14, y = 4.4, xmin=-1.19, xmax=-1.09, size = 0.3, col="grey60") + 
+  annotate("text", x = -1.05, y = 4.4, size = 2.5, hjust = 0, label = "Model without register: C-value = 0.91, AIC = 8153", col="grey50") + 
+  annotate("pointrange", x = -1.14, y = 5, xmin=-1.19, xmax=-1.09, size = 0.3, col="grey20", lty=2) + 
+  annotate("text", x = -1.05, y = 5, size = 2.5, hjust = 0, label = "Model with register: C-value = 0.92, AIC = 7900", col="grey30") + 
   annotate("text", x = -1.19, y = 2.5, size = 2.5, hjust = 0,
            label = "Fixed effects not plotted:\n- matrix verb tense\n- complement verb type\n- complement verb semantics",
            col="grey40") + 
@@ -334,6 +335,7 @@ dwplot(data_plot, dodge_size = 0.4, whisker_args = list(aes(linetype = model))) 
         panel.grid.major.y=element_blank(), 
         panel.grid.minor.x = element_blank(), 
         panel.grid.major.x=element_blank())
+ggsave("Figure2.svg", Fig2, device = "svg", width = 240, height= 160, units = "mm",dpi = 300)
 ```
 
 ## Calculating country coefficient distance matrices
@@ -431,7 +433,8 @@ lay <- rbind(c(1,1,1,1,2,2),
              c(1,1,1,1,2,2),
              c(1,1,1,1,3,3),
              c(1,1,1,1,3,3))
-grid.arrange(grobs=list(p1,p2,p3),layout_matrix = lay)
+Fig3 <- grid.arrange(grobs=list(p1,p2,p3),layout_matrix = lay)
+ggsave("Figure3.svg", Fig3, device = "svg", width = 240, height= 160, units = "mm",dpi = 300)
 ```
 
 ## Mantel test to compare the two distance matrices
